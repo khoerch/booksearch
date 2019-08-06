@@ -1,1 +1,17 @@
+* {
+    box-sizing: border-box;
+}
 
+.App {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    color: white;
+    background: black;
+    padding: 4%;
+    display: flex;
+    flex-direction: column;
+}

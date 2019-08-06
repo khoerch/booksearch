@@ -1,16 +1,13 @@
-import React from './node_modules/react';
+import React from 'react';
 import ListItem from '../ListItem/ListItem';
 import './FilterableList.css';
 
 class FilterableList extends React.Component {
     render() {
-        const list = this.props.books.map(item => {
+        const list = this.props.books.map((item, i) => {
             return (<ListItem 
-                title={item.title}
-                author={item.author}
-                price={item.price}
-                description={item.description}
-                cover={item.cover}/>)
+                key={i}
+                book={item}/>)
         })
 
         return (

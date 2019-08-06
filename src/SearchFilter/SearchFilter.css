@@ -1,0 +1,6 @@
+.search-filter {
+    background: gray;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}

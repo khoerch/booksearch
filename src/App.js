@@ -7,18 +7,33 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			books: [
-				{
-					title: 'Henry I',
-					author: 'C. Warren Hollister',
-					price: '$50.00',
-					description: 'The resulting volume...',
-					cover: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROor-EmSuab7C5CW0hyyRX7YUO_oTnIEQY0MvZGuydMGjbMDkY'
-				}
-			],
+			books: [],
 			printType: "All",
 			bookType: "No Filter"
 		}
+	}
+
+	getSearchResults(query) {
+		const url = 'https://www.googleapis.com/books/v1/volumes?q=' + encodeURI(query) + '&key=AIzaSyAAonQlH9qUwukYGc5k9FepSM8cYe9LiRs';
+		fetch(url)
+			.then(res => {
+				if(!res.ok) {
+					throw new Error('Something went wrong, please try again later');
+				}
+				return res.json();
+			})
+			.then(data => {
+				console.log(data.items);
+				this.setState({
+					books: data.items,
+					error: null
+				})
+			})
+			.catch(err => {
+				this.setState({
+					error: err.message
+				})
+			})
 	}
 
 	render() {
@@ -27,7 +42,8 @@ class App extends React.Component {
 				<header>
 					<h1>Google Book Search</h1>
 				</header>
-				<SearchBar />
+				<SearchBar 
+					handleSearch={query => this.getSearchResults(query)}/>
 				<FilterableList 
 					books={this.state.books}
 					printType={this.state.printType}

@@ -7,7 +7,8 @@ class SearchBar extends React.Component {
     render() {
         return (
             <div className="search-bar">
-                <SearchForm />
+                <SearchForm 
+                    handleSearch={this.props.handleSearch}/>
                 <SearchFilter />
             </div> 
         )

@@ -3,13 +3,19 @@ import './ListItem.css';
 
 class ListItem extends React.Component {
     render() {
+        const price = (this.props.book.saleInfo.saleability === 'FOR_SALE')
+            ? <p>Price: ${this.props.book.saleInfo.listPrice.amount}</p>
+            : <p>Price: Not for sale.</p>
+
         return (
             <li className="list-item">
-                <h2>{this.props.title}</h2>
-                <p>Author: {this.props.author}</p>
-                <p>Price: {this.props.price}</p>
-                <p>{this.props.description}</p>
-                <img src={this.props.cover} />
+                <img src={this.props.book.volumeInfo.imageLinks.smallThumbnail} alt="book cover"/>
+                <div className="item-text">
+                    <h2>{this.props.book.volumeInfo.title}</h2>
+                    <p>Author: {this.props.book.volumeInfo.authors[0]}</p>
+                    {price}
+                    <p>{this.props.book.volumeInfo.description}</p>
+                </div>
             </li> 
         )
     }
