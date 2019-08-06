@@ -12,7 +12,7 @@ class ListItem extends React.Component {
                 <img src={this.props.book.volumeInfo.imageLinks.smallThumbnail} alt="book cover"/>
                 <div className="item-text">
                     <h2>{this.props.book.volumeInfo.title}</h2>
-                    <p>Author: {this.props.book.volumeInfo.authors[0]}</p>
+                    <p>Author: {this.props.book.volumeInfo.authors}</p>
                     {price}
                     <p>{this.props.book.volumeInfo.description}</p>
                 </div>

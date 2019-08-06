@@ -8,14 +8,24 @@ class App extends React.Component {
 		super(props);
 		this.state = {
 			books: [],
-			printType: "All",
-			bookType: "No Filter"
+			printType: "all",
+			bookType: "partial"
 		}
 	}
 
 	getSearchResults(query) {
-		const url = 'https://www.googleapis.com/books/v1/volumes?q=' + encodeURI(query) + '&key=AIzaSyAAonQlH9qUwukYGc5k9FepSM8cYe9LiRs';
-		fetch(url)
+		const params = {
+			q: encodeURI(query),
+			filter: this.state.bookType,
+			printType: this.state.printType,
+			key: 'AIzaSyAAonQlH9qUwukYGc5k9FepSM8cYe9LiRs'
+		}
+
+		const urlParams = new URLSearchParams(Object.entries(params));
+		console.log(urlParams.toString());
+
+		const url = 'https://www.googleapis.com/books/v1/volumes?';
+		fetch(url + urlParams)
 			.then(res => {
 				if(!res.ok) {
 					throw new Error('Something went wrong, please try again later');
@@ -36,6 +46,20 @@ class App extends React.Component {
 			})
 	}
 
+	updatePrintType(result) {
+		console.log(result);
+		this.setState({
+			printType: result
+		})
+	}
+
+	updateBookType(result) {
+		console.log(result);
+		this.setState({
+			bookType: result
+		})
+	}
+
 	render() {
 		return (
 			<main className='App'>
@@ -43,7 +67,9 @@ class App extends React.Component {
 					<h1>Google Book Search</h1>
 				</header>
 				<SearchBar 
-					handleSearch={query => this.getSearchResults(query)}/>
+					handleSearch={query => this.getSearchResults(query)}
+					bookType={result => this.updateBookType(result)}
+					printType={result => this.updatePrintType(result)}/>
 				<FilterableList 
 					books={this.state.books}
 					printType={this.state.printType}

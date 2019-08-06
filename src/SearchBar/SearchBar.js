@@ -9,7 +9,9 @@ class SearchBar extends React.Component {
             <div className="search-bar">
                 <SearchForm 
                     handleSearch={this.props.handleSearch}/>
-                <SearchFilter />
+                <SearchFilter 
+                    bookType={this.props.bookType}
+                    printType={this.props.printType}/>
             </div> 
         )
     }
