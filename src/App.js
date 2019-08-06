@@ -1,26 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
+import SearchBar from './SearchBar/SearchBar';
+import FilterableList from './FilterableList/FilterableList';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			books: [
+				{
+					title: 'Henry I',
+					author: 'C. Warren Hollister',
+					price: '$50.00',
+					description: 'The resulting volume...',
+					cover: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROor-EmSuab7C5CW0hyyRX7YUO_oTnIEQY0MvZGuydMGjbMDkY'
+				}
+			],
+			printType: "All",
+			bookType: "No Filter"
+		}
+	}
+
+	render() {
+		return (
+			<main className='App'>
+				<header>
+					<h1>Google Book Search</h1>
+				</header>
+				<SearchBar />
+				<FilterableList 
+					books={this.state.books}
+					printType={this.state.printType}
+					bookType={this.state.bookType}/>
+    		</main>
+		)
+	}
 }
 
 export default App;
