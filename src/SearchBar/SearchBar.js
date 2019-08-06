@@ -1,6 +1,6 @@
 import React from 'react';
-import SearchForm from './SearchForm/SearchForm';
-import SearchFilter from './SearchFilter/SearchFilter';
+import SearchForm from '../SearchForm/SearchForm';
+import SearchFilter from '../SearchFilter/SearchFilter';
 import './SearchBar.css';
 
 class SearchBar extends React.Component {
